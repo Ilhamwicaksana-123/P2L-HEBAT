@@ -1,0 +1,493 @@
+.pesanan-page-body {
+    margin: 0;
+    background: #f7faf7;
+    color: #183028;
+}
+
+.pesanan-page {
+    padding-top: 82px;
+    min-height: 100vh;
+}
+
+.pesanan-section {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+}
+
+.pesanan-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 18px;
+    margin-bottom: 22px;
+}
+
+.pesanan-heading h1 {
+    margin: 12px 0 8px;
+    font-family: var(--font-playfair);
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: #14532d;
+}
+
+.pesanan-heading p {
+    margin: 0;
+    color: #5f7a6c;
+    max-width: 680px;
+}
+
+.pesanan-stats span {
+    display: inline-flex;
+    padding: 9px 14px;
+    border-radius: 999px;
+    background: #fff;
+    border: 1px solid #dcebdc;
+    color: #355848;
+    font-size: 0.88rem;
+    font-weight: 600;
+}
+
+.pesanan-alert {
+    margin-bottom: 18px;
+}
+
+.pesanan-overview-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.pesanan-overview-card {
+    padding: 18px 20px;
+    border-radius: 22px;
+    background:
+        radial-gradient(circle at top right, rgba(34, 197, 94, 0.11), transparent 36%),
+        rgba(255, 255, 255, 0.82);
+    border: 1px solid #dcebdc;
+}
+
+.pesanan-overview-card strong {
+    display: block;
+    font-size: 1.5rem;
+    color: #14532d;
+}
+
+.pesanan-overview-card p {
+    margin: 6px 0 0;
+    color: #648173;
+}
+
+.pesanan-stack {
+    display: grid;
+    gap: 18px;
+}
+
+.pesanan-card {
+    padding: 24px;
+    border-radius: 24px;
+    background: #fff;
+    border: 1px solid rgba(34, 197, 94, 0.08);
+    box-shadow: 0 10px 28px rgba(20, 83, 45, 0.05);
+}
+
+.pesanan-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.pesanan-kode {
+    display: inline-flex;
+    margin-bottom: 8px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    background: #edf7ee;
+    color: #166534;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.pesanan-head h2 {
+    margin: 0;
+    font-size: 1.28rem;
+    color: #14532d;
+}
+
+.pesanan-head-right {
+    display: grid;
+    justify-items: end;
+    gap: 10px;
+}
+
+.pesanan-status {
+    padding: 8px 13px;
+    border-radius: 999px;
+    background: #dcfce7;
+    color: #166534;
+    font-weight: 700;
+}
+
+.pesanan-status-menunggu_pembayaran {
+    background: #fff7d6;
+    color: #9a6700;
+}
+
+.pesanan-status-diproses {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.pesanan-status-dikirim {
+    background: #e9f2ff;
+    color: #1d4ed8;
+}
+
+.pesanan-status-selesai {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+.pesanan-status-batal {
+    background: #ffe4e6;
+    color: #be123c;
+}
+
+.pesanan-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    padding: 18px;
+    border-radius: 20px;
+    background: #f8fcf8;
+    border: 1px solid #e1eee1;
+}
+
+.pesanan-meta-grid p {
+    margin: 0 0 6px;
+    color: #648173;
+}
+
+.pesanan-meta-grid strong {
+    color: #14532d;
+}
+
+.pesanan-mini-timeline {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.pesanan-mini-step {
+    padding: 12px 14px;
+    border-radius: 16px;
+    background: #f8fcf8;
+    border: 1px solid #e1eee1;
+    color: #648173;
+    font-weight: 600;
+    text-align: center;
+}
+
+.pesanan-mini-step.is-done {
+    background: linear-gradient(135deg, #eefbf0, #f7fff4);
+    border-color: #b9e2c0;
+    color: #166534;
+}
+
+.pesanan-detail-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.pesanan-detail-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid #edf3eb;
+}
+
+.pesanan-detail-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.pesanan-detail-row h3 {
+    margin: 0 0 6px;
+    font-size: 1rem;
+    color: #14532d;
+}
+
+.pesanan-detail-row p {
+    margin: 0;
+    color: #648173;
+}
+
+.pesanan-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+}
+
+.pesanan-actions-column {
+    align-items: stretch;
+}
+
+.pesanan-action-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0 18px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    color: #14532d;
+    background: #edf7ee;
+    border: 1px solid #dcebdc;
+}
+
+.pesanan-action-secondary {
+    background: #fff;
+}
+
+.pesanan-ui-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: #edf7ee;
+    color: #166534;
+    border: 1px solid #dcebdc;
+    font-size: 0.84rem;
+    font-weight: 700;
+}
+
+.pesanan-bayar-button,
+.button-disabled {
+    width: auto;
+}
+
+.button-disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.button-disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.pesanan-detail-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 22px;
+    align-items: start;
+}
+
+.pembayaran-card {
+    padding: 24px;
+    border-radius: 24px;
+    background:
+        radial-gradient(circle at top right, rgba(37, 99, 235, 0.12), transparent 32%),
+        linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    border: 1px solid #dbe8f7;
+    box-shadow: 0 10px 28px rgba(20, 83, 45, 0.05);
+}
+
+.pembayaran-card h2 {
+    margin: 12px 0 8px;
+    color: #17345f;
+    font-size: 1.45rem;
+}
+
+.pembayaran-card-copy {
+    margin: 0;
+    color: #55708f;
+    line-height: 1.7;
+}
+
+.pesanan-detail-hero {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.pesanan-detail-hero-card {
+    padding: 16px 18px;
+    border-radius: 20px;
+    background: #f8fcf8;
+    border: 1px solid #e1eee1;
+}
+
+.pesanan-detail-hero-card span {
+    display: block;
+    margin-bottom: 6px;
+    color: #648173;
+    font-size: 0.86rem;
+}
+
+.pesanan-detail-hero-card strong {
+    color: #14532d;
+}
+
+.pesanan-address-note {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-top: 18px;
+    padding: 14px 16px;
+    border-radius: 18px;
+    background: #f8fcf8;
+    border: 1px solid #e1eee1;
+}
+
+.pesanan-address-note i {
+    color: #15803d;
+    margin-top: 2px;
+}
+
+.pesanan-address-note p {
+    margin: 0;
+    color: #648173;
+    line-height: 1.65;
+}
+
+.pesanan-mini-timeline-detail {
+    margin-top: 18px;
+}
+
+.pembayaran-info-list {
+    display: grid;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.pembayaran-info-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #dde7f2;
+}
+
+.pembayaran-info-item span {
+    color: #5e7793;
+}
+
+.pembayaran-info-item strong {
+    color: #17345f;
+    text-align: right;
+}
+
+.pembayaran-steps {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.pembayaran-step {
+    padding: 12px 14px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid #dde7f2;
+    color: #35506e;
+}
+
+@media (max-width: 900px) {
+    .pesanan-section {
+        padding: 24px 18px 48px;
+    }
+
+    .pesanan-heading,
+    .pesanan-head {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pesanan-overview-strip,
+    .pesanan-detail-hero,
+    .pesanan-mini-timeline {
+        grid-template-columns: 1fr;
+    }
+
+    .pesanan-head-right {
+        justify-items: start;
+    }
+
+    .pesanan-meta-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pesanan-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .pesanan-page {
+        padding-top: 76px;
+    }
+
+    .pesanan-section {
+        padding-inline: 14px;
+    }
+
+    .pesanan-card,
+    .pembayaran-card,
+    .pesanan-empty-state {
+        border-radius: 20px;
+    }
+
+    .pesanan-card,
+    .pembayaran-card {
+        padding: 18px;
+    }
+
+    .pesanan-heading h1 {
+        font-size: clamp(2.1rem, 13vw, 2.8rem);
+        line-height: 0.98;
+    }
+
+    .pesanan-heading p {
+        font-size: 0.96rem;
+        line-height: 1.75;
+    }
+
+    .pesanan-stats {
+        width: 100%;
+    }
+
+    .pesanan-stats span {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .pesanan-detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .pesanan-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .pembayaran-info-item {
+        flex-direction: column;
+    }
+
+    .pembayaran-info-item strong {
+        text-align: left;
+    }
+}
