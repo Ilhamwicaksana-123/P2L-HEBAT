@@ -148,6 +148,7 @@ class CheckoutController extends Controller
         $message = $pesanan->metode_pembayaran === Pesanan::METODE_COD
             ? 'Pesanan berhasil dibuat dengan kode ' . $pesanan->kode_pesanan . '.'
             : 'Pesanan berhasil dibuat. Selesaikan pembayaran untuk pesanan ' . $pesanan->kode_pesanan . '.';
+        $this->recordActivity('create', 'pesanan', 'Pengguna membuat pesanan ' . $pesanan->kode_pesanan . '.');
 
         return redirect($redirectRoute)->with('success', $message);
     }

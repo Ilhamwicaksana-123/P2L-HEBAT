@@ -101,6 +101,8 @@ Route::middleware(['auth', 'admin'])
             ->name('laporan.export-pdf');
         Route::patch('pesanan/{pesanan}/status', [App\Http\Controllers\Admin\PesananController::class, 'updateStatus'])
             ->name('pesanan.update-status');
+        Route::get('activity-logs', [App\Http\Controllers\Admin\ActivityLogController::class, 'index'])
+            ->name('activity-logs.index');
     });
 
 Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');

@@ -28,6 +28,7 @@ class AlamatController extends Controller
             'kode_pos' => $validated['kode_pos'],
             'is_default' => $makeDefault || ! $hasExistingAddress,
         ]);
+        $this->recordActivity('create', 'alamat', 'Pengguna menambahkan alamat pengiriman.');
 
         return redirect()->back()->with('success', 'Alamat berhasil disimpan.');
     }
@@ -51,6 +52,7 @@ class AlamatController extends Controller
             'kode_pos' => $validated['kode_pos'],
             'is_default' => $makeDefault ? true : $address->is_default,
         ]);
+        $this->recordActivity('update', 'alamat', 'Pengguna memperbarui alamat pengiriman.');
 
         return redirect()->back()->with('success', 'Alamat berhasil diperbarui.');
     }
@@ -71,6 +73,7 @@ class AlamatController extends Controller
                 $replacement->update(['is_default' => true]);
             }
         }
+        $this->recordActivity('delete', 'alamat', 'Pengguna menghapus alamat pengiriman.');
 
         return redirect()->back()->with('success', 'Alamat berhasil dihapus.');
     }

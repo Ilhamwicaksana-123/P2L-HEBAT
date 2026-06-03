@@ -29,7 +29,7 @@
     </label>
     <label>
         <span>Email</span>
-        <input type="email" name="email" value="{{ old('email', $user->email) }}" required>
+        <input type="email" name="email" value="{{ old('email', $user->email) }}" maxlength="30" required>
     </label>
     <label>
         <span>No HP</span>

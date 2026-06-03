@@ -29,9 +29,9 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'email' => $this->emailValidationRules(),
             'password' => 'required',
-        ]);
+        ], $this->emailValidationMessages());
 
         $user = User::where('email', $request->input('email'))->first();
 
@@ -54,6 +54,7 @@ class LoginController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
         $request->session()->put('auth_provider', 'manual');
+        $this->recordActivity('login', 'auth', 'Pengguna login ke sistem.', $user);
 
         $message = in_array($user->role, ['super_admin', 'admin'], true)
             ? 'Login berhasil. Anda masuk sebagai admin.'
@@ -64,6 +65,8 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        $this->recordActivity('logout', 'auth', 'Pengguna logout dari sistem.');
+
         Auth::logout();
 
         $request->session()->invalidate();
@@ -126,6 +129,7 @@ class LoginController extends Controller
                 'harga_satuan' => $produk->harga_produk,
             ]);
             $cartItem->save();
+            $this->recordActivity('add_to_cart', 'keranjang', 'Pengguna menambahkan produk ke keranjang setelah login.', $user);
 
             return redirect()
                 ->route('keranjang.index')

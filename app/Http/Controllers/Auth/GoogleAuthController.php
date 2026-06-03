@@ -51,6 +51,7 @@ class GoogleAuthController extends Controller
             // Login user
             Auth::login($user);
             request()->session()->put('auth_provider', 'google');
+            $this->recordActivity('login', 'auth', 'Pengguna login dengan Google.', $user);
 
             return $this->redirectAfterLogin(request(), $user, 'Login dengan Google berhasil!');
 
@@ -109,6 +110,7 @@ class GoogleAuthController extends Controller
                 'harga_satuan' => $produk->harga_produk,
             ]);
             $cartItem->save();
+            $this->recordActivity('add_to_cart', 'keranjang', 'Pengguna menambahkan produk ke keranjang setelah login Google.', $user);
 
             return redirect()
                 ->route('keranjang.index')

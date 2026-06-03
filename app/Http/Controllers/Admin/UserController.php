@@ -48,12 +48,12 @@ class UserController extends Controller
 
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:ms_user,email',
+            'email' => $this->emailValidationRules(['unique:ms_user,email']),
             'password' => 'required|string|min:8',
             'no_hp' => 'required|string|max:20',
             'role' => 'required|in:super_admin,admin,user',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:2048',
-        ]);
+        ], $this->emailValidationMessages());
 
         $validated['password'] = Hash::make($validated['password']);
 
@@ -83,12 +83,12 @@ class UserController extends Controller
 
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:ms_user,email,' . $user->id_user . ',id_user',
+            'email' => $this->emailValidationRules(['unique:ms_user,email,' . $user->id_user . ',id_user']),
             'no_hp' => 'required|string|max:20',
             'role' => 'required|in:super_admin,admin,user',
             'password' => 'nullable|string|min:8',
             'photo' => 'nullable|image|mimes:jpg,jpeg,png,webp,gif|max:2048',
-        ]);
+        ], $this->emailValidationMessages());
 
         if (! empty($validated['password'])) {
             $validated['password'] = Hash::make($validated['password']);

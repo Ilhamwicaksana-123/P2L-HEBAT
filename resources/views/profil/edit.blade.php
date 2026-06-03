@@ -79,7 +79,7 @@
 
                     <div>
                         <label class="input-label">Email</label>
-                        <input type="email" name="email" value="{{ old('email', $user->email) }}" class="input-field">
+                        <input type="email" name="email" value="{{ old('email', $user->email) }}" class="input-field" maxlength="30">
                     </div>
 
                     <div>

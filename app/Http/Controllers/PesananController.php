@@ -53,6 +53,7 @@ class PesananController extends Controller
         } catch (RuntimeException $exception) {
             return back()->with('error', $exception->getMessage());
         }
+        $this->recordActivity('pay', 'pesanan', 'Pengguna membuka pembayaran untuk pesanan ' . $order->kode_pesanan . '.');
 
         return redirect()->away($transaction->snap_redirect_url);
     }

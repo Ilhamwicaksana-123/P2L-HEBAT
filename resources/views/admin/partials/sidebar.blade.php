@@ -40,6 +40,10 @@
                     <i class="fa-solid fa-users"></i>
                     <span>Pengguna</span>
                 </a>
+                <a href="{{ route('admin.activity-logs.index') }}" class="{{ request()->routeIs('admin.activity-logs.*') ? 'active' : '' }}">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Log Aktivitas</span>
+                </a>
             @endif
             <a href="{{ route('profil.edit') }}">
                 <i class="fa-solid fa-user-gear"></i>

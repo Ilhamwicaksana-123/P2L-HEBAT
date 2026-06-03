@@ -47,6 +47,7 @@
                        value="{{ old('email') }}"
                        placeholder="Masukkan email"
                        class="input"
+                       maxlength="30"
                        required>
             </div>
 

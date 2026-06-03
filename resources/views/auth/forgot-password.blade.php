@@ -62,7 +62,7 @@
                 <label>Email</label>
                 <input type="email" name="email"
                     placeholder="Masukkan email Anda"
-                    class="input" value="{{ old('email') }}" required>
+                    class="input" value="{{ old('email') }}" maxlength="30" required>
                 @error('email')
                     <span style="color: #dc2626; font-size: 12px; margin-top: 5px; display: block;">{{ $message }}</span>
                 @enderror

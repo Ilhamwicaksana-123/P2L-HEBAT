@@ -33,12 +33,12 @@ class ResetPasswordController extends Controller
     public function reset(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|exists:ms_user,email',
+            'email' => $this->emailValidationRules(['exists:ms_user,email']),
             'token' => 'required',
             'password' => 'required|confirmed'
-        ], [
-            'password.confirmed' => 'Password tidak cocok'
-        ]);
+        ], array_merge($this->emailValidationMessages(), [
+            'password.confirmed' => 'Password tidak cocok',
+        ]));
 
         // Validasi token
         $reset = DB::table('password_reset_tokens')

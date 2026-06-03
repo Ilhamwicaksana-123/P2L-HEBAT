@@ -19,9 +19,9 @@ class RegisterController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:ms_user,email',
+            'email' => $this->emailValidationRules(['unique:ms_user,email']),
             'password' => 'required'
-        ]);
+        ], $this->emailValidationMessages());
 
         $user = User::create([
             'nama' => $request->name,
@@ -34,6 +34,7 @@ class RegisterController extends Controller
         // Auto login setelah register
         Auth::login($user);
         $request->session()->put('auth_provider', 'manual');
+        $this->recordActivity('register', 'auth', 'Pengguna membuat akun baru.', $user);
 
         return redirect('/produk')->with('register_success', 'Akun kamu sudah aktif. Silakan mulai belanja.');
     }

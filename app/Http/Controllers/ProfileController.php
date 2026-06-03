@@ -43,10 +43,10 @@ class ProfileController extends Controller
 
         $request->validate([
             'nama' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:ms_user,email,' . $user->id_user . ',id_user',
+            'email' => $this->emailValidationRules(['unique:ms_user,email,' . $user->id_user . ',id_user']),
             'no_hp' => 'nullable|string|max:20',
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+        ], $this->emailValidationMessages());
 
         $user->nama = $request->nama;
         $user->email = $request->email;
@@ -63,6 +63,7 @@ class ProfileController extends Controller
         }
 
         $user->save();
+        $this->recordActivity('update', 'profil', 'Pengguna memperbarui data profil.');
 
         return redirect()
             ->to($this->getProfileRedirectRoute($user))
@@ -89,6 +90,7 @@ class ProfileController extends Controller
         $user->update([
             'password' => Hash::make($request->password),
         ]);
+        $this->recordActivity('update_password', 'profil', 'Pengguna memperbarui password akun.');
 
         return redirect()
             ->to($this->getProfileRedirectRoute($user))

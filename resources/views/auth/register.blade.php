@@ -59,7 +59,7 @@
                 <label>Email</label>
                 <input type="email" name="email"
                     placeholder="Masukkan email"
-                    class="input" value="{{ old('email') }}" required>
+                    class="input" value="{{ old('email') }}" maxlength="30" required>
             </div>
 
             <!-- NO HP (BARU) -->
