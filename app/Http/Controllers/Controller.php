@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\ActivityLog;
+use App\Models\Produk;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use RuntimeException;
 use Throwable;
 
@@ -44,7 +46,13 @@ abstract class Controller
         ];
     }
 
-    protected function recordActivity(string $action, ?string $module = null, ?string $description = null, ?User $user = null): void
+    protected function recordActivity(
+        string $action,
+        ?string $module = null,
+        ?string $description = null,
+        ?User $user = null,
+        Produk|int|null $produk = null
+    ): void
     {
         try {
             $user ??= Auth::user();
@@ -53,9 +61,14 @@ abstract class Controller
                 return;
             }
 
+            if (! in_array($user->role, ['admin', 'user'], true)) {
+                return;
+            }
+
             ActivityLog::create([
                 'id_user' => $user->id_user,
-                'name' => $user->nama,
+                'id_produk' => $produk instanceof Produk ? $produk->id_produk : $produk,
+                'nama' => $user->nama,
                 'role' => $user->role,
                 'action' => $action,
                 'module' => $module,
@@ -63,8 +76,12 @@ abstract class Controller
                 'ip_address' => request()->ip(),
                 'user_agent' => request()->userAgent(),
             ]);
-        } catch (Throwable) {
-            // Logging should never block the main user flow.
+        } catch (Throwable $exception) {
+            Log::warning('Activity log gagal disimpan.', [
+                'action' => $action,
+                'module' => $module,
+                'message' => $exception->getMessage(),
+            ]);
         }
     }
 }

@@ -76,7 +76,7 @@
     </div>
 
     <div class="pagination-wrap">
-        {{ $users->links() }}
+        {{ $users->links('admin.partials.pagination') }}
     </div>
 </div>
 @endsection

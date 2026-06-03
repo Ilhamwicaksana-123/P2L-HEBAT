@@ -182,10 +182,21 @@
                                     <span class="profil-address-default-badge">Alamat utama</span>
                                 @endif
 
-                                <form action="{{ route('alamat.destroy', $address->id_alamat) }}" method="POST" onsubmit="return confirm('Hapus alamat ini?')">
+                                <form action="{{ route('alamat.destroy', $address->id_alamat) }}" method="POST" id="delete-address-{{ $address->id_alamat }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn-ghost-red profil-address-delete">Hapus</button>
+                                    <button
+                                        type="button"
+                                        class="btn-ghost-red profil-address-delete"
+                                        data-action-trigger
+                                        data-action-target="delete-address-{{ $address->id_alamat }}"
+                                        data-action-kicker="Hapus Alamat"
+                                        data-action-title="Hapus alamat ini?"
+                                        data-action-text="Alamat akan dihapus dari daftar alamatmu."
+                                        data-action-confirm="Ya, Hapus"
+                                    >
+                                        Hapus
+                                    </button>
                                 </form>
                             </div>
                         </article>
@@ -242,5 +253,6 @@
     </section>
 </main>
 @include('partials.logout-modal')
+@include('partials.action-confirm-modal')
 </body>
 </html>

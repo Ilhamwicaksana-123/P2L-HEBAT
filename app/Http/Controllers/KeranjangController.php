@@ -59,7 +59,12 @@ class KeranjangController extends Controller
             'harga_satuan' => $produk->harga_produk,
         ]);
         $cartItem->save();
-        $this->recordActivity('add_to_cart', 'keranjang', 'Pengguna menambahkan produk ke keranjang.');
+        $this->recordActivity(
+            'add_to_cart',
+            'keranjang',
+            'Pengguna menambahkan ' . $produk->nama_produk . ' ke keranjang.',
+            produk: $produk
+        );
 
         if ($request->expectsJson()) {
             return response()->json([
@@ -97,7 +102,12 @@ class KeranjangController extends Controller
             'qty' => (int) $validated['qty'],
             'harga_satuan' => $produk->harga_produk,
         ]);
-        $this->recordActivity('update', 'keranjang', 'Pengguna memperbarui jumlah produk di keranjang.');
+        $this->recordActivity(
+            'update',
+            'keranjang',
+            'Pengguna memperbarui jumlah ' . $produk->nama_produk . ' di keranjang.',
+            produk: $produk
+        );
 
         if ($request->expectsJson()) {
             $cartItem->refresh();
@@ -123,8 +133,14 @@ class KeranjangController extends Controller
         $cartItem = KeranjangItem::findOrFail($cart);
         abort_unless((int) $cartItem->id_user === (int) Auth::id(), 403);
 
+        $produk = $cartItem->produk;
         $cartItem->delete();
-        $this->recordActivity('delete', 'keranjang', 'Pengguna menghapus produk dari keranjang.');
+        $this->recordActivity(
+            'delete',
+            'keranjang',
+            'Pengguna menghapus ' . ($produk?->nama_produk ?? 'produk') . ' dari keranjang.',
+            produk: $produk
+        );
 
         return back()->with('success', 'Produk berhasil dihapus dari keranjang.');
     }

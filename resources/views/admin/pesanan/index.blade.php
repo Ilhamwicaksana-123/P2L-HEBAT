@@ -71,7 +71,7 @@
     </div>
 
     <div class="pagination-wrap">
-        {{ $orders->links() }}
+        {{ $orders->links('admin.partials.pagination') }}
     </div>
 </div>
 

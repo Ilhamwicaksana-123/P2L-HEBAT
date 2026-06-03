@@ -140,7 +140,7 @@ class Pesanan extends Model
 
     public function alamat()
     {
-        return $this->belongsTo(Alamat::class, 'id_alamat', 'id_alamat');
+        return $this->belongsTo(Alamat::class, 'id_alamat', 'id_alamat')->withTrashed();
     }
 
     public function detail()

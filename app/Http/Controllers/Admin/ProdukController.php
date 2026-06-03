@@ -29,7 +29,7 @@ class ProdukController extends Controller
                 });
             })
             ->orderByDesc('id_produk')
-            ->paginate(10)
+            ->paginate(20)
             ->withQueryString();
 
         return view('admin.produks.index', compact('produks', 'search'));
@@ -55,7 +55,13 @@ class ProdukController extends Controller
             $validated['gambar_produk'] = $request->file('gambar_produk')->store('produk', 'public');
         }
 
-        Produk::create($validated);
+        $produk = Produk::create($validated);
+        $this->recordActivity(
+            'create',
+            'produk',
+            'Admin menambahkan produk ' . $produk->nama_produk . '.',
+            produk: $produk
+        );
 
         return redirect()
             ->route('admin.produks.index')
@@ -86,6 +92,13 @@ class ProdukController extends Controller
         }
 
         $produk->update($validated);
+        $produk->refresh();
+        $this->recordActivity(
+            'update',
+            'produk',
+            'Admin memperbarui produk ' . $produk->nama_produk . '.',
+            produk: $produk
+        );
 
         return redirect()
             ->route('admin.produks.index')
@@ -94,6 +107,9 @@ class ProdukController extends Controller
 
     public function destroy(Produk $produk)
     {
+        $namaProduk = $produk->nama_produk;
+        $produkId = $produk->id_produk;
+
         if ($produk->pesananDetail()->exists()) {
             return redirect()
                 ->route('admin.produks.index')
@@ -111,6 +127,13 @@ class ProdukController extends Controller
         if ($produk->gambar_produk && Storage::disk('public')->exists($produk->gambar_produk)) {
             Storage::disk('public')->delete($produk->gambar_produk);
         }
+
+        $this->recordActivity(
+            'delete',
+            'produk',
+            'Admin menghapus produk ' . $namaProduk . '.',
+            produk: $produkId
+        );
 
         return redirect()
             ->route('admin.produks.index')

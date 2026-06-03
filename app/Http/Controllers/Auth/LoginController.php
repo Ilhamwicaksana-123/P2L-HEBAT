@@ -129,7 +129,13 @@ class LoginController extends Controller
                 'harga_satuan' => $produk->harga_produk,
             ]);
             $cartItem->save();
-            $this->recordActivity('add_to_cart', 'keranjang', 'Pengguna menambahkan produk ke keranjang setelah login.', $user);
+            $this->recordActivity(
+                'add_to_cart',
+                'keranjang',
+                'Pengguna menambahkan ' . $produk->nama_produk . ' ke keranjang setelah login.',
+                $user,
+                $produk
+            );
 
             return redirect()
                 ->route('keranjang.index')

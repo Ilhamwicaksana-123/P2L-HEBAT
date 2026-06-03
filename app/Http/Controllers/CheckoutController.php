@@ -148,7 +148,14 @@ class CheckoutController extends Controller
         $message = $pesanan->metode_pembayaran === Pesanan::METODE_COD
             ? 'Pesanan berhasil dibuat dengan kode ' . $pesanan->kode_pesanan . '.'
             : 'Pesanan berhasil dibuat. Selesaikan pembayaran untuk pesanan ' . $pesanan->kode_pesanan . '.';
-        $this->recordActivity('create', 'pesanan', 'Pengguna membuat pesanan ' . $pesanan->kode_pesanan . '.');
+        $productSummary = $this->formatCheckoutProductSummary($items);
+        $firstProduct = $items->first()?->produk;
+        $this->recordActivity(
+            'buy',
+            'pesanan',
+            'Pengguna membeli ' . $productSummary . ' pada pesanan ' . $pesanan->kode_pesanan . '.',
+            produk: $firstProduct
+        );
 
         return redirect($redirectRoute)->with('success', $message);
     }
@@ -262,6 +269,13 @@ class CheckoutController extends Controller
         } while (Pesanan::where('kode_pesanan', $code)->exists());
 
         return $code;
+    }
+
+    private function formatCheckoutProductSummary(Collection $items): string
+    {
+        return $items
+            ->map(fn (CheckoutItem $item) => $item->produk->nama_produk . ' x' . $item->qty)
+            ->join(', ');
     }
 
     private function redirectUnavailableCheckout(string $source): RedirectResponse

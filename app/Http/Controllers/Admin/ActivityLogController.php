@@ -19,10 +19,11 @@ class ActivityLogController extends Controller
         $date = trim((string) $request->query('date'));
 
         $logs = ActivityLog::query()
-            ->with('user')
+            ->with(['user', 'produk'])
+            ->whereIn('role', ['admin', 'user'])
             ->when($search !== '', function ($query) use ($search) {
                 $query->where(function ($builder) use ($search) {
-                    $builder->where('name', 'like', "%{$search}%")
+                    $builder->where('nama', 'like', "%{$search}%")
                         ->orWhere('role', 'like', "%{$search}%")
                         ->orWhere('action', 'like', "%{$search}%")
                         ->orWhere('module', 'like', "%{$search}%")
@@ -31,6 +32,9 @@ class ActivityLogController extends Controller
                         ->orWhereHas('user', function ($userQuery) use ($search) {
                             $userQuery->where('nama', 'like', "%{$search}%")
                                 ->orWhere('email', 'like', "%{$search}%");
+                        })
+                        ->orWhereHas('produk', function ($produkQuery) use ($search) {
+                            $produkQuery->where('nama_produk', 'like', "%{$search}%");
                         });
                 });
             })
@@ -39,10 +43,11 @@ class ActivityLogController extends Controller
             ->when($module !== '', fn ($query) => $query->where('module', $module))
             ->when($date !== '', fn ($query) => $query->whereDate('created_at', $date))
             ->orderByDesc('created_at')
-            ->paginate(15)
+            ->paginate(5)
             ->withQueryString();
 
         $roles = ActivityLog::query()
+            ->whereIn('role', ['admin', 'user'])
             ->whereNotNull('role')
             ->where('role', '!=', '')
             ->distinct()
@@ -50,6 +55,7 @@ class ActivityLogController extends Controller
             ->pluck('role');
 
         $actions = ActivityLog::query()
+            ->whereIn('role', ['admin', 'user'])
             ->whereNotNull('action')
             ->where('action', '!=', '')
             ->distinct()
@@ -57,6 +63,7 @@ class ActivityLogController extends Controller
             ->pluck('action');
 
         $modules = ActivityLog::query()
+            ->whereIn('role', ['admin', 'user'])
             ->whereNotNull('module')
             ->where('module', '!=', '')
             ->distinct()

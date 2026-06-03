@@ -75,7 +75,7 @@ class AlamatController extends Controller
         }
         $this->recordActivity('delete', 'alamat', 'Pengguna menghapus alamat pengiriman.');
 
-        return redirect()->back()->with('success', 'Alamat berhasil dihapus.');
+        return redirect()->back()->with('success', 'Alamat berhasil dihapus dari daftar alamat.');
     }
 
     /**

@@ -7,7 +7,7 @@
 @section('content')
 <div class="admin-card">
     <form method="GET" class="toolbar" data-activity-log-filter-form>
-        <input type="text" name="search" value="{{ $search }}" placeholder="Cari nama, aksi, modul, deskripsi, atau IP">
+        <input type="text" name="search" value="{{ $search }}" placeholder="Cari nama, produk, aksi, modul, deskripsi, atau IP">
 
         <select name="role">
             <option value="">Semua role</option>
@@ -47,6 +47,7 @@
                     <th>Role</th>
                     <th>Aksi</th>
                     <th>Modul</th>
+                    <th>Produk</th>
                     <th>Deskripsi</th>
                     <th>IP</th>
                 </tr>
@@ -54,8 +55,8 @@
             <tbody>
                 @forelse($logs as $log)
                     <tr>
-                        <td>{{ optional($log->created_at)->format('d M Y H:i') }}</td>
-                        <td>{{ $log->name ?: ($log->user?->nama ?? '-') }}</td>
+                        <td>{{ optional($log->created_at)->timezone('Asia/Jakarta')->format('d M Y H:i') }} WIB</td>
+                        <td>{{ $log->nama ?: ($log->user?->nama ?? '-') }}</td>
                         <td>
                             <span class="badge {{ $log->role === 'super_admin' ? 'badge-danger-soft' : ($log->role === 'admin' ? 'badge-success' : 'badge-role') }}">
                                 {{ $log->role ?: '-' }}
@@ -63,12 +64,13 @@
                         </td>
                         <td>{{ $log->action }}</td>
                         <td>{{ $log->module ?: '-' }}</td>
+                        <td>{{ $log->produk?->nama_produk ?? '-' }}</td>
                         <td>{{ $log->description ?: '-' }}</td>
                         <td>{{ $log->ip_address ?: '-' }}</td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="empty-state">Belum ada log aktivitas.</td>
+                        <td colspan="8" class="empty-state">Belum ada log aktivitas.</td>
                     </tr>
                 @endforelse
             </tbody>
@@ -76,7 +78,7 @@
     </div>
 
     <div class="pagination-wrap">
-        {{ $logs->links() }}
+        {{ $logs->links('admin.partials.pagination') }}
     </div>
 </div>
 

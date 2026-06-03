@@ -107,5 +107,6 @@
     @endunless
 </main>
 @include('partials.logout-modal')
+@include('partials.action-confirm-modal')
 </body>
 </html>

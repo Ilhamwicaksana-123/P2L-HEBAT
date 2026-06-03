@@ -36,7 +36,7 @@ class PesananController extends Controller
             ->when($dateFrom !== '', fn ($query) => $query->whereDate('created_at', '>=', $dateFrom))
             ->when($dateTo !== '', fn ($query) => $query->whereDate('created_at', '<=', $dateTo))
             ->orderByDesc('id_pesanan')
-            ->paginate(10)
+            ->paginate(20)
             ->withQueryString();
 
         return view('admin.pesanan.index', [

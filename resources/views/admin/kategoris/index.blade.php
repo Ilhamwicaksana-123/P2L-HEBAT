@@ -61,7 +61,7 @@
     </div>
 
     <div class="pagination-wrap">
-        {{ $kategoris->links() }}
+        {{ $kategoris->links('admin.partials.pagination') }}
     </div>
 </div>
 
